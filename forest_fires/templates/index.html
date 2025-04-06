@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultas SQL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Selecciona una consulta</h1>
+    <form method="post" action="/query">
+        <select name="selected_query">
+            {% for name in queries %}
+                <option value="{{ name }}" {% if name == selected_query %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Ejecutar</button>
+    </form>
+
+    {% if records %}
+        <h2>Resultados de: {{ query }}</h2>
+        <table border="1">
+            <tr>
+                {% for col in columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+            {% for row in records %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% elif selected_query %}
+        <p>No se encontraron resultados o hubo un error.</p>
+    {% endif %}
+</body>
+</html>
