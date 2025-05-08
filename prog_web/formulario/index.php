@@ -2,27 +2,26 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Cuenta</title>
+    <title>Registro de usuario</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="form-container">
-        <h2>Crear Cuenta</h2>
+        <h2>Registro de usuario</h2>
+
+        <div id="error-mensaje" class="error-message" style="display:none;"></div>
+
         <form action="registro.php" method="POST">
-            <label for="nombres">Nombre(s):</label>
-            <input type="text" name="nombres" required>
 
-            <label for="apellidos">Apellidos:</label>
-            <input type="text" name="apellidos" required>
-
-            <label for="correo">Correo:</label>
-            <input type="email" name="correo" required>
-
-            <label for="contrasena">Contraseña:</label>
-            <input type="password" name="contrasena" required>
-
-            <label for="confirmar_contrasena">Confirmar Contraseña:</label>
-            <input type="password" name="confirmar_contrasena" required>
+            <input type="text" name="apellido_p" placeholder="Apellido paterno" required>
+            <input type="text" name="apellido_m" placeholder="Apellido materno" required>
+            <input type="text" name="nombre" placeholder="Nombre(s)" required>
+            <input type="tel" name="telefono" placeholder="Teléfono" required>
+            <input type="text" name="pais" placeholder="Pais" required>
+            <input type="text" name="ciudad" placeholder="Ciudad" required>
+            <input type="email" name="correo" placeholder="Correo electrónico" required>
+            <input type="password" name="contrasena" placeholder="Contraseña" required>
+            <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required>
 
             <div class="checkbox-container">
                 <input type="checkbox" name="terminos" value="1" required>

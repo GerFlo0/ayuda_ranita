@@ -1,42 +1,66 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById('registroForm');
-    const nombres = document.getElementById('nombres');
-    const apellidos = document.getElementById('apellidos');
-    const correo = document.getElementById('correo');
-    const contrasena = document.querySelector('input[name="contrasena"]');
-    const confirmarContrasena = document.querySelector('input[name="confirmar_contrasena"]');
-    const errorMensaje = document.getElementById('errorMensaje');
+    const form = document.querySelector("form");
 
-    // Convertir automáticamente a mayúsculas
-    nombres.addEventListener('input', () => {
-        nombres.value = nombres.value.toUpperCase();
+    const nombre = form.nombre;
+    const apellidoP = form.apellido_p;
+    const apellidoM = form.apellido_m;
+    const telefono = form.telefono;
+    const pais = form.pais;
+    const ciudad = form.ciudad;
+    const correo = form.correo;
+    const contrasena = form.contrasena;
+    const confirmarContrasena = form.confirmar_contrasena;
+    const terminos = form.terminos;
+
+    const errorDiv = document.getElementById("error-mensaje");
+
+    function mostrarError(mensaje) {
+        errorDiv.textContent = mensaje;
+        errorDiv.style.display = "block";
+        setTimeout(() => {
+            errorDiv.style.display = "none";
+        }, 4000);
+    }
+
+    [nombre, apellidoP, apellidoM].forEach(field => {
+        field.addEventListener("input", () => {
+            field.value = field.value.toUpperCase();
+        });
     });
 
-    apellidos.addEventListener('input', () => {
-        apellidos.value = apellidos.value.toUpperCase();
-    });
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    // Validación del correo y contraseñas
-    form.addEventListener('submit', (e) => {
-        errorMensaje.textContent = ""; // limpiar mensaje anterior
+        if (
+            !nombre.value.trim() || !apellidoP.value.trim() || !apellidoM.value.trim() ||
+            !telefono.value.trim() || !pais.value.trim() || !ciudad.value.trim() || !correo.value.trim() ||
+            !contrasena.value.trim() || !confirmarContrasena.value.trim()
+        ) {
+            mostrarError("Por favor completa todos los campos.");
+            return;
+        }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(correo.value)) {
-            e.preventDefault();
-            errorMensaje.textContent = "Ingrese un correo válido.";
+        const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!correoRegex.test(correo.value)) {
+            mostrarError("Ingresa un correo electrónico válido.");
             return;
         }
 
         if (contrasena.value !== confirmarContrasena.value) {
-            e.preventDefault();
-            errorMensaje.textContent = "Las contraseñas no coinciden.";
+            mostrarError("Las contraseñas no coinciden.");
             return;
         }
 
         if (contrasena.value.length < 6) {
-            e.preventDefault();
-            errorMensaje.textContent = "La contraseña debe tener al menos 6 caracteres.";
+            mostrarError("La contraseña debe tener al menos 6 caracteres.");
             return;
         }
+
+        if (!terminos.checked) {
+            mostrarError("Debes aceptar los términos y condiciones.");
+            return;
+        }
+
+        form.submit();
     });
 });
