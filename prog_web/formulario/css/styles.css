@@ -6,7 +6,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    background: #aeeee4;
+    background: radial-gradient(circle,rgba(174, 238, 228, 1) 17%, rgba(45, 58, 125, 1) 81%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,4 +142,147 @@ button[type="submit"]:hover {
     .form-container h2 {
         font-size: 24px;
     }
+}
+
+.volver-menu {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.boton-volver {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1d72b8;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-volver:hover {
+    background-color: #155a96;
+}
+
+ul {
+    list-style-type: none; /* Elimina el marcador por defecto */
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 10px 0; /* Separación entre los elementos de la lista */
+    padding: 10px;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    text-align: center;
+}
+
+/* Estilo cuando el mouse pasa por encima de los elementos de la lista */
+li:hover {
+    background-color: #f0f0f0; /* Color de fondo suave en hover */
+    transform: scale(1.05); /* Ligera ampliación del elemento */
+}
+
+/* Estilo de enlaces dentro de las etiquetas <li> */
+li a {
+    text-decoration: none;
+    color: #333; /* Color del enlace */
+    font-size: 18px;
+    display: block; /* Para que el enlace ocupe todo el espacio del <li> */
+    padding: 10px;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Estilo cuando el mouse pasa por encima de los enlaces */
+li a:hover {
+    color: #007bff; /* Color del texto en hover */
+    background-color: #e0e0e0; /* Fondo más claro */
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    z-index: 999;
+}
+
+.popup button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.popup button:hover {
+    background-color: #d32f2f;
+}
+
+input[type="email"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="email"]:focus {
+    border-color: #4c6baf;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+    outline: none;
+}
+
+#buscar {
+    background-color: #3a90d6;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#buscar:hover {
+    background-color: #1cc0c0;
+    transform: scale(1.03);
+}
+
+#buscar:active {
+    transform: scale(0.98);
+}
+
+#boton-consultar {
+    text-align: center;
+}
+
+.tabla-usuarios {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabla-usuarios th,
+.tabla-usuarios td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabla-usuarios th {
+    background-color: #f2f2f2;
 }

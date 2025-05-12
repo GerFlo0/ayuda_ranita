@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
+    const form = document.getElementById("registro-form");
 
     const nombre = form.nombre;
     const apellidoP = form.apellido_p;
@@ -61,6 +61,22 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        form.submit();
+        const formData = new FormData(form);
+
+        fetch("../php/registro.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data); // Muestra mensaje de éxito o error
+            if (data.includes("exitosamente")) {
+                form.reset(); // Limpia el formulario solo si fue exitoso
+            }
+        })
+        .catch(error => {
+            mostrarError("Error en el envío. Intenta más tarde.");
+            console.error(error);
+        });
     });
 });
