@@ -5,16 +5,13 @@ $dbname = "prog_web";
 $user = "root";
 $password = "";
 
-// Crear conexión
 $conn = new mysqli($host, $user, $password, $dbname);
 
-// Verificar conexión
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Datos del formulario de modificación
     $apellido_p = $_POST['apellido_p'];
     $apellido_m = $_POST['apellido_m'];
     $nombre = $_POST['nombre'];
@@ -24,15 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo = $_POST['correo'];
     $contrasena = $_POST['contrasena'];
 
-    // Verificar si la contraseña ha cambiado
     if (!empty($contrasena)) {
         $hash = password_hash($contrasena, PASSWORD_DEFAULT);
     } else {
-        // Si no se proporciona nueva contraseña, se deja la actual
         $hash = null;
     }
 
-    // Actualización en la base de datos
     if ($hash) {
         $stmt = $conn->prepare("UPDATE usuarios SET apellido_p = ?, apellido_m = ?, nombre = ?, telefono = ?, pais = ?, ciudad = ?, contrasena = ? WHERE correo = ?");
         $stmt->bind_param("ssssssss", $apellido_p, $apellido_m, $nombre, $telefono, $pais, $ciudad, $hash, $correo);
@@ -50,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 } elseif (isset($_GET['correo'])) {
-    // Mostrar datos del usuario para modificación
     $correo = $_GET['correo'];
 
     $stmt = $conn->prepare("SELECT apellido_p, apellido_m, nombre, telefono, pais, ciudad, correo FROM usuarios WHERE correo = ?");

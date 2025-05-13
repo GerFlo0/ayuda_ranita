@@ -6,8 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #aeeee4;
-    background: radial-gradient(circle,rgba(174, 238, 228, 1) 17%, rgba(45, 58, 125, 1) 81%);
+    background: radial-gradient(circle, rgba(174, 238, 228, 1) 17%, rgba(45, 58, 125, 1) 81%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,25 +19,23 @@ body {
     to { opacity: 1; }
 }
 
+@keyframes slideIn {
+    from { transform: translateY(40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes inputFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .form-container {
-    background-color: #ffffff;
+    background-color: #fff;
     padding: 40px;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 450px;
     animation: slideIn 0.7s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(40px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 .form-container h2 {
@@ -48,21 +45,40 @@ body {
     font-size: 28px;
 }
 
-/* Inputs */
 form input[type="text"],
 form input[type="tel"],
 form input[type="email"],
-form input[type="password"] {
+form input[type="password"],
+input[type="email"] {
     width: 100%;
     padding: 12px 16px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    transition: all 0.3s ease;
     font-size: 16px;
+    transition: all 0.3s ease;
     opacity: 0;
     transform: translateY(10px);
     animation: inputFadeIn 0.5s ease forwards;
+}
+
+input[type="email"] {
+    max-width: 400px;
+    margin: 12px 0;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+form input:focus,
+input[type="email"]:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+input[type="email"]:focus {
+    border-color: #4c6baf;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
 }
 
 form input:nth-of-type(1) { animation-delay: 0.1s; }
@@ -73,19 +89,6 @@ form input:nth-of-type(5) { animation-delay: 0.5s; }
 form input:nth-of-type(6) { animation-delay: 0.6s; }
 form input:nth-of-type(7) { animation-delay: 0.7s; }
 form input:nth-of-type(8) { animation-delay: 0.8s; }
-
-@keyframes inputFadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-form input:focus {
-    border-color: #007BFF;
-    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
-    outline: none;
-}
 
 .checkbox-container {
     display: flex;
@@ -103,7 +106,8 @@ form input:focus {
     margin-right: 8px;
 }
 
-button[type="submit"] {
+button[type="submit"],
+#buscar {
     width: 100%;
     padding: 14px;
     background-color: #007BFF;
@@ -112,15 +116,32 @@ button[type="submit"] {
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
     opacity: 0;
     transform: translateY(10px);
     animation: inputFadeIn 0.5s ease forwards;
     animation-delay: 1s;
 }
 
-button[type="submit"]:hover {
+#buscar {
+    background-color: #3a90d6;
+    opacity: 1;
+    transform: none;
+    animation: none;
+}
+
+button[type="submit"]:hover,
+.boton-volver:hover {
     background-color: #0056b3;
+}
+
+#buscar:hover {
+    background-color: #1cc0c0;
+    transform: scale(1.03);
+}
+
+#buscar:active {
+    transform: scale(0.98);
 }
 
 .error-message {
@@ -134,70 +155,87 @@ button[type="submit"]:hover {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-@media (max-width: 500px) {
-    .form-container {
-        padding: 30px 20px;
-    }
-
-    .form-container h2 {
-        font-size: 24px;
-    }
-}
-
-.volver-menu {
-    margin-top: 20px;
+.contenedor-usuarios {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.boton-volver {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #1d72b8;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
+.tabla-usuarios {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.boton-volver:hover {
-    background-color: #155a96;
+.tabla-usuarios th,
+.tabla-usuarios td {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 16px;
+    max-width: 200px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.tabla-usuarios th {
+    background-color: #140d72;
+    color: white;
+    font-weight: bold;
+}
+
+.tabla-usuarios tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabla-usuarios tr:hover {
+    background-color: #f1f1f1;
+}
+
+#tabla-usuarios p {
+    font-size: 18px;
+    color: #d9534f;
+    margin-top: 20px;
 }
 
 ul {
-    list-style-type: none; /* Elimina el marcador por defecto */
+    list-style-type: none;
     padding: 0;
     margin: 0;
 }
 
 li {
-    margin: 10px 0; /* Separación entre los elementos de la lista */
+    margin: 10px 0;
     padding: 10px;
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    border-radius: 5px;
     text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Estilo cuando el mouse pasa por encima de los elementos de la lista */
 li:hover {
-    background-color: #f0f0f0; /* Color de fondo suave en hover */
-    transform: scale(1.05); /* Ligera ampliación del elemento */
+    background-color: #f0f0f0;
+    transform: scale(1.05);
 }
 
-/* Estilo de enlaces dentro de las etiquetas <li> */
 li a {
-    text-decoration: none;
-    color: #333; /* Color del enlace */
-    font-size: 18px;
-    display: block; /* Para que el enlace ocupe todo el espacio del <li> */
+    display: block;
     padding: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
     border-radius: 5px;
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Estilo cuando el mouse pasa por encima de los enlaces */
 li a:hover {
-    color: #007bff; /* Color del texto en hover */
-    background-color: #e0e0e0; /* Fondo más claro */
+    color: #007bff;
+    background-color: #e0e0e0;
 }
 
 .popup {
@@ -229,60 +267,42 @@ li a:hover {
     background-color: #d32f2f;
 }
 
-input[type="email"] {
-    width: 100%;
-    max-width: 400px;
-    padding: 12px 16px;
-    margin: 12px 0;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s, box-shadow 0.3s;
+.volver-menu {
+    margin-top: 30px;
+    text-align: center;
 }
 
-input[type="email"]:focus {
-    border-color: #4c6baf;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
+.boton-volver {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-volver:focus {
     outline: none;
 }
 
-#buscar {
-    background-color: #3a90d6;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+@media (max-width: 500px) {
+    .form-container {
+        padding: 30px 20px;
+    }
+
+    .form-container h2 {
+        font-size: 24px;
+    }
 }
 
-#buscar:hover {
-    background-color: #1cc0c0;
-    transform: scale(1.03);
-}
-
-#buscar:active {
-    transform: scale(0.98);
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
 }
 
 #boton-consultar {
     text-align: center;
-}
-
-.tabla-usuarios {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.tabla-usuarios th,
-.tabla-usuarios td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
-
-.tabla-usuarios th {
-    background-color: #f2f2f2;
 }

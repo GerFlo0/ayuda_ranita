@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const formBuscar = document.getElementById("form-buscar");
     const formModificar = document.getElementById("form-modificar");
 
-    // Evento para buscar usuario por correo
     formBuscar.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -32,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-    // Evento para confirmar modificaciones
     formModificar.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -46,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 alert(data);
 
-                // Reiniciar y regresar al formulario de búsqueda
                 formModificar.reset();
                 formBuscar.reset();
                 formModificar.style.display = "none";

@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.text())
         .then(data => {
-            alert(data); // Muestra mensaje de éxito o error
+            alert(data);
             if (data.includes("exitosamente")) {
-                form.reset(); // Limpia el formulario solo si fue exitoso
+                form.reset();
             }
         })
         .catch(error => {
